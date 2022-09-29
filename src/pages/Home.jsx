@@ -1,29 +1,45 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { popularUrl } from "../helper/APIs";
+import { popularUrl, trendingUrl } from "../helper/APIs";
 import request from "../helper/request";
-import { moviesSelector, setMovies } from "../redux/slices/moviesSlice";
+import {
+  currentPageSelector,
+  papularMoviesSelector,
+  setCurrentPage,
+  setPapularMovies,
+  setTrendingMovies,
+  trendingMoviesSelector,
+} from "../redux/slices/moviesSlice";
 import Pagination from "@mui/material/Pagination";
 import Slider from "../components/Slider/Slider";
 
 function Home() {
-  const [page, setPage] = useState(1);
-  const movies = useSelector(moviesSelector);
+  const page = useSelector(currentPageSelector);
+  const papularMovies = useSelector(papularMoviesSelector);
+  const trendingMovies = useSelector(trendingMoviesSelector);
   const dispatch = useDispatch();
-  console.log(movies);
+  // console.log(papularMovies);
+  console.log(trendingMovies);
 
   useEffect(() => {
     request(popularUrl, page).then((data) =>
-      dispatch(setMovies({ movies: data.results }))
+      dispatch(setPapularMovies({ papular: data.results }))
+    );
+    request(trendingUrl, page).then((data) =>
+      dispatch(setTrendingMovies({ trending: data.results }))
     );
   }, [page]);
   const handleChange = (e, val) => {
-    setPage(val);
+    dispatch(
+      setCurrentPage({
+        page: val,
+      })
+    );
   };
   return (
     <>
-      <Slider />
+      <Slider trending={trendingMovies} />
       <Pagination
         count={20}
         defaultPage={1}

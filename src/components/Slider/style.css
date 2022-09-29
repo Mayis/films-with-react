@@ -1,6 +1,6 @@
 #sliderParent {
   width: 100%;
-  height: 350px;
+  height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,8 +9,8 @@
 }
 
 #slider {
-  width: 70%;
-  height: 100%;
+  width: 90%;
+  height: 55%;
 }
 
 .swiper {
@@ -43,4 +43,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.sliderTitle {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.562);
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.swiper-slide:hover .sliderTitle {
+  display: flex;
 }

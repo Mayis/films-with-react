@@ -7,34 +7,36 @@ import "swiper/css/pagination";
 import "./style.css";
 // import required modules
 import { Autoplay, FreeMode, Pagination } from "swiper";
+import { imgURL } from "../../helper/APIs";
 
-export default function Slider() {
+export default function Slider({ trending }) {
+  console.log(trending);
   return (
     <div id="sliderParent">
       <div id="slider">
         <Swiper
-          slidesPerView={4}
-          spaceBetween={10}
+          slidesPerView={5}
+          spaceBetween={15}
           freeMode={true}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
           }}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Autoplay, FreeMode, Pagination]}
+          modules={[Autoplay, FreeMode]}
           className="mySwiper"
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
+          {trending?.map((movie, i) => (
+            <SwiperSlide key={movie.id}>
+              <img
+                src={imgURL + movie.backdrop_path}
+                alt={movie.original_title + " image"}
+                className="slideImg"
+              />
+              <div className="sliderTitle">
+                <span>{movie.title ? movie.title : movie.name}</span>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

@@ -1,20 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  movies: [],
+  trendingMovies: [],
+  papularMovies: [],
+  currentPage: 1,
 };
 
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-    setMovies(state, { payload }) {
-      state.movies = payload.movies;
+    setPapularMovies(state, { payload }) {
+      state.papularMovies = payload.papular;
+    },
+    setTrendingMovies(state, { payload }) {
+      state.trendingMovies = payload.trending;
+    },
+    setCurrentPage(state, { payload }) {
+      state.currentPage = payload.page;
     },
   },
 });
 
 export default moviesSlice.reducer;
 
-export const moviesSelector = (state) => state.movies.movies;
-export const { setMovies } = moviesSlice.actions;
+export const papularMoviesSelector = (state) => state.movies.papularMovies;
+export const trendingMoviesSelector = (state) => state.movies.trendingMovies;
+export const currentPageSelector = (state) => state.movies.currentPage;
+export const { setPapularMovies, setTrendingMovies, setCurrentPage } =
+  moviesSlice.actions;
