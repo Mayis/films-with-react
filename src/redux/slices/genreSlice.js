@@ -1,34 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import request from "../../helper/request";
 
 const initialState = {
-  genres: [
-    { id: 28, name: "Action" },
-    { id: 12, name: "Adventure" },
-    { id: 16, name: "Animation" },
-    { id: 35, name: "Comedy" },
-    { id: 80, name: "Crime" },
-    { id: 99, name: "Documentary" },
-    { id: 18, name: "Drama" },
-    { id: 10751, name: "Family" },
-    { id: 14, name: "Fantasy" },
-    { id: 36, name: "History" },
-    { id: 27, name: "Horror" },
-    { id: 10402, name: "Music" },
-    { id: 9648, name: "Mystery" },
-    { id: 10749, name: "Romance" },
-    { id: 878, name: "Science Fiction" },
-    { id: 10770, name: "TV Movie" },
-    { id: 53, name: "Thriller" },
-    { id: 10752, name: "War" },
-    { id: 37, name: "Western" },
-  ],
+  genresMovies: [],
 };
 
 const genreSlice = createSlice({
   name: "genre",
   initialState,
-  reducers: {},
+  reducers: {
+    setMoviesByGenre(state, { payload }) {
+      state.genresMovies = payload.movies;
+    },
+  },
 });
 
-export const genreSelector = (state) => state.genre.genres;
+export const genreSelector = (state) => state.genre.genresMovies;
+export const { setMoviesByGenre } = genreSlice.actions;
 export default genreSlice.reducer;

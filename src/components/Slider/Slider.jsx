@@ -8,11 +8,18 @@ import "./style.css";
 // import required modules
 import { Autoplay, FreeMode, Pagination } from "swiper";
 import { imgURL } from "../../helper/APIs";
+import { trendingMoviesSelector } from "../../redux/slices/trendingMoviesSlice";
 
-export default function Slider({ trending }) {
-  console.log(trending);
+import { useSelector } from "react-redux";
+
+export default function Slider() {
+  const trendingMovies = useSelector(trendingMoviesSelector);
+  console.log(trendingMovies);
   return (
     <div id="sliderParent">
+      <div id="mainTitle">
+        <h1 className="titleH1">Trending Movies</h1>
+      </div>
       <div id="slider">
         <Swiper
           slidesPerView={5}
@@ -25,10 +32,10 @@ export default function Slider({ trending }) {
           modules={[Autoplay, FreeMode]}
           className="mySwiper"
         >
-          {trending?.map((movie, i) => (
+          {trendingMovies?.map((movie, i) => (
             <SwiperSlide key={movie.id}>
               <img
-                src={imgURL + movie.backdrop_path}
+                src={imgURL + movie.poster_path}
                 alt={movie.original_title + " image"}
                 className="slideImg"
               />

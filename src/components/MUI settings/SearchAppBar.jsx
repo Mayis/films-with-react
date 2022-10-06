@@ -53,7 +53,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function PrimarySearchAppBar({ showGenres, showFavorites, showWatchLater }) {
+function PrimarySearchAppBar({
+  showGenres,
+  showFavorites,
+  showWatchLater,
+  backHome,
+}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -72,7 +77,8 @@ function PrimarySearchAppBar({ showGenres, showFavorites, showWatchLater }) {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block", cursor: "pointer" } }}
+            onClick={backHome}
           >
             TMOVIEDB
           </Typography>

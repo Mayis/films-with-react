@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -10,11 +11,20 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-
+import { genres } from "../helper/APIs";
 import { genreSelector } from "../redux/slices/genreSlice";
-
+const navStyle = {
+  textDecoration: "none",
+  fontSize: "20px",
+  color: "black",
+};
+const active = {
+  textDecoration: "none",
+  fontSize: "20px",
+  borderBottom: "2px solid red",
+  color: "red",
+};
 function Genres({ show, close }) {
-  const genres = useSelector(genreSelector);
   const dispatch = useDispatch();
 
   return (
@@ -26,7 +36,9 @@ function Genres({ show, close }) {
         <Divider />
         {genres?.map((genre) => (
           <ListItem key={genre.id}>
-            <Typography sx={{ cursor: "pointer" }}>{genre.name}</Typography>
+            <NavLink to={`genres/${genre.id}`} style={navStyle}>
+              {genre.name}
+            </NavLink>
           </ListItem>
         ))}
       </List>
