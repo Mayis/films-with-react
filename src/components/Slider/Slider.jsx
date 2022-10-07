@@ -9,12 +9,9 @@ import "./style.css";
 import { Autoplay, FreeMode, Pagination } from "swiper";
 import { imgURL } from "../../helper/APIs";
 import { trendingMoviesSelector } from "../../redux/slices/trendingMoviesSlice";
-
 import { useSelector } from "react-redux";
-
 export default function Slider() {
   const trendingMovies = useSelector(trendingMoviesSelector);
-  console.log(trendingMovies);
   return (
     <div id="sliderParent">
       <div id="mainTitle">

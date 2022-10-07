@@ -19,18 +19,12 @@ import {
 function Home() {
   const page = useSelector(currentPageSelector);
   const dispatch = useDispatch();
+  console.log(page);
+
   useEffect(() => {
+    dispatch(getPapularMovies({ url: popularUrl, page }));
     dispatch(getTrendingMovies(trendingUrl));
-    dispatch(getPapularMovies(popularUrl, page));
   }, [page]);
-  // useEffect(() => {
-  //   request(popularUrl, page).then((data) =>
-  //     dispatch(setPapularMovies({ papular: data.results }))
-  //   );
-  //   request(trendingUrl, page).then((data) =>
-  //     dispatch(setTrendingMovies({ trending: data.results }))
-  //   );
-  // }, [page]);
   const handleChange = (e, val) => {
     dispatch(
       setCurrentPage({

@@ -9,8 +9,10 @@ const initialState = {
 };
 export const getPapularMovies = createAsyncThunk(
   "papularMovies/getPapularMovies",
-  async (url, page) => {
-    return request(url, page).then((data) => data.results);
+  async ({ url, page }) => {
+    return request(url, page).then((data) => {
+      return data.results;
+    });
   }
 );
 const papularMoviesSlice = createSlice({

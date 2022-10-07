@@ -1,5 +1,5 @@
 import axios from "axios";
-export default async function request(url, page = 1) {
+export default async function request(url, page) {
   const options = {
     method: "GET",
     url,

@@ -7,7 +7,7 @@ const initialState = {
 };
 export const getTrendingMovies = createAsyncThunk(
   "trendingMovies/getTrendingMovies",
-  async (url, page) => {
+  async (url) => {
     return request(url).then((data) => data.results);
   }
 );
