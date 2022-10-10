@@ -33,3 +33,4 @@ const searchMovieSlice = createSlice({
 });
 
 export default searchMovieSlice.reducer;
+export const searchMoviesSelector = (state) => state.searchMovies.movies;

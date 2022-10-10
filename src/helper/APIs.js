@@ -8,7 +8,7 @@ export const searchURL = baseURL + "/search/movie?" + apiKey + "&query=";
 export const genreURL =
   "https://api.themoviedb.org/3/discover/movie?api_key=f7d65e059593a0f3812fa8f984d7cb57&with_genres=";
 export const videoURL = "https://www.youtube.com/embed/";
-
+export const movieURl = "https://api.themoviedb.org/3/movie/";
 export const genres = [
   { id: 28, name: "Action" },
   { id: 12, name: "Adventure" },

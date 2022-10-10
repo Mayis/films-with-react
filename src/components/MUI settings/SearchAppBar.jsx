@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { memo } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -12,6 +12,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
+import { useDispatch, useSelector } from "react-redux";
+import { getSearchedMovie } from "../../redux/slices/searchMoviesSlice";
+import { useNavigate } from "react-router-dom";
+import { searchURL } from "../../helper/APIs";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,6 +63,18 @@ function PrimarySearchAppBar({
   showWatchLater,
   backHome,
 }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const getSearchValue = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const search = form.get("search");
+    if (search.trim() !== "") {
+      navigate(`search/${search}`);
+      dispatch(getSearchedMovie({ url: searchURL + search }));
+      e.target.reset();
+    }
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -86,10 +102,14 @@ function PrimarySearchAppBar({
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
+            <Box component="form" id="searchForm" onSubmit={getSearchValue}>
+              <StyledInputBase
+                type="text"
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                name="search"
+              />
+            </Box>
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "flex", md: "flex" } }}>
