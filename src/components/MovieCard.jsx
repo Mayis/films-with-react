@@ -1,14 +1,24 @@
 import React from "react";
-
 import Card from "@mui/material/Card";
-import { imgURL } from "../helper/APIs";
+import { apiKey, imgURL } from "../helper/APIs";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getSelectedMovie } from "../redux/slices/selectedMovieSlice";
 export default function MovieCard({ movie }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleMovie = (id) => {
+    navigate(`/movie/${id}`);
+  };
   return (
-    <Card sx={{ width: "100%", marginBottom: "10px" }}>
+    <Card
+      sx={{ width: "100%", marginBottom: "10px" }}
+      onClick={() => handleMovie(movie.id)}
+    >
       <CardActionArea
         sx={{ display: "flex", height: "250px", padding: "20px" }}
       >

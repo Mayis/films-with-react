@@ -1,32 +1,15 @@
 import React, { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import {
-  Drawer,
-  List,
-  ListItemIcon,
-  ListItemText,
-  ListItem,
-  Divider,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { Drawer, List, ListItem, Divider, Typography } from "@mui/material";
 import { genres } from "../helper/APIs";
-import { genreSelector } from "../redux/slices/genreSlice";
 const navStyle = {
   textDecoration: "none",
   fontSize: "20px",
   color: "black",
 };
-const active = {
-  textDecoration: "none",
-  fontSize: "20px",
-  borderBottom: "2px solid red",
-  color: "red",
-};
-function Genres({ show, close }) {
-  const dispatch = useDispatch();
 
+function Genres({ show, close }) {
   return (
     <Drawer anchor={"left"} open={show} onClose={close}>
       <List sx={{ width: "250px" }}>

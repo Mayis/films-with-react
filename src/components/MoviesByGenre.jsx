@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { genreURL } from "../helper/APIs";
+import { useNavigate, useParams } from "react-router-dom";
+import { apiKey, genreURL } from "../helper/APIs";
 import {
   genrePageSelector,
   genreSelector,
@@ -14,12 +14,12 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { imgURL } from "../helper/APIs";
 import Pagination from "@mui/material/Pagination";
+import { getSelectedMovie } from "../redux/slices/selectedMovieSlice";
 
 function MoviesByGenre() {
   const moviesByGenre = useSelector(genreSelector);
   const page = useSelector(genrePageSelector);
   const dispatch = useDispatch();
-  console.log(moviesByGenre);
   const { genreId } = useParams();
   useEffect(() => {
     dispatch(getMoviesGenre({ url: genreURL + genreId, page }));
@@ -31,12 +31,20 @@ function MoviesByGenre() {
       })
     );
   };
+  const navigate = useNavigate();
+  const handleMovie = (id) => {
+    navigate(`/movie/${id}`);
+  };
   return (
     <>
       <Box sx={{ width: "80%", margin: "0 auto", padding: "10px" }}>
         <ImageList variant="masonry" cols={4} gap={8}>
           {moviesByGenre.map((item) => (
-            <ImageListItem key={item.poster_path}>
+            <ImageListItem
+              sx={{ cursor: "pointer" }}
+              key={item.poster_path}
+              onClick={() => handleMovie(item.id)}
+            >
               <img
                 src={`${imgURL + item.poster_path}?w=248&fit=crop&auto=format`}
                 srcSet={`${

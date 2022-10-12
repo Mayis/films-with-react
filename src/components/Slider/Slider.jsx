@@ -7,11 +7,19 @@ import "swiper/css/pagination";
 import "./style.css";
 // import required modules
 import { Autoplay, FreeMode, Pagination } from "swiper";
-import { imgURL } from "../../helper/APIs";
+import { apiKey, imgURL, movieURl } from "../../helper/APIs";
 import { trendingMoviesSelector } from "../../redux/slices/trendingMoviesSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getSelectedMovie } from "../../redux/slices/selectedMovieSlice";
 export default function Slider() {
   const trendingMovies = useSelector(trendingMoviesSelector);
+  console.log(trendingMovies);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleMovie = (id) => {
+    navigate(`/movie/${id}`);
+  };
   return (
     <div id="sliderParent">
       <div id="mainTitle">
@@ -30,7 +38,7 @@ export default function Slider() {
           className="mySwiper"
         >
           {trendingMovies?.map((movie, i) => (
-            <SwiperSlide key={movie.id}>
+            <SwiperSlide key={movie.id} onClick={() => handleMovie(movie.id)}>
               <img
                 src={imgURL + movie.poster_path}
                 alt={movie.original_title + " image"}
